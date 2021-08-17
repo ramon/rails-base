@@ -1,0 +1,120 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+Rails:
+  Enabled: true
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.0
+  DisplayCopNames: true
+  Exclude:
+    - bin/**/*
+    - config/initializers/secure_headers.rb
+    - db/**/*
+    - node_modules/**/*
+    - vendor/**/*
+    - tmp/**/*
+
+RSpec/Capybara:
+  EnabledMethods:
+    - background
+    - feature
+    - scenario
+
+# Rails
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+# RSpec
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/HookArgument:
+  EnforcedStyle: each
+
+RSpec/RepeatedDescription:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+# Style
+
+Style/AndOr:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/SymbolArray:
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+  SupportedStyles:
+    - compact
+    - expanded
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringMethods:
+  Enabled: true
+
+Style/NestedTernaryOperator:
+  Enabled: false
+
+# Layout
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+  SupportedStyles:
+    - with_first_parameter
+    - with_fixed_indentation
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+  SupportedStylesAlignWith:
+    - keyword
+    - variable
+
+Layout/LineLength:
+  Max: 120
+
+# Metrics
+
+Metrics/MethodLength:
+  Max: 16
+
+Metrics/BlockLength:
+  Enabled: false
