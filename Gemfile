@@ -80,8 +80,7 @@ gem "inline_svg", "~> 1.6"
 gem "name_of_person", "~> 1.0"
 
 gem "decent_exposure", "~> 3.0"
-gem "draper", "~> 4.0"
-gem "interactor", "~> 3.1"
+gem "interactor-rails", "~> 2.2"
 gem "pagy", "~> 4.7"
 gem "responders", "~> 3.0"
 
