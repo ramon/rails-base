@@ -83,6 +83,7 @@ gem "decent_exposure", "~> 3.0"
 gem "interactor-rails", "~> 2.2"
 gem "pagy", "~> 4.7"
 gem "responders", "~> 3.0"
+gem "view_component", require: "view_component/engine"
 
 gem "meta-tags", "~> 2.15"
 gem "simple_form", "~> 5.1"

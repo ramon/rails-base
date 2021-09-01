@@ -424,6 +424,7 @@ DEPENDENCIES
   standard
   strong_migrations (~> 0.7.6)
   tzinfo-data
+  view_component
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 6.0.0.beta.7)
