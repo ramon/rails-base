@@ -34,8 +34,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.boolean :admin, default: false
       t.string :time_zone, null: false, default: ""
+      t.datetime :accepted_terms_at, null: false
+      t.datetime :accepted_privacy_at, null: false
+      t.boolean :admin, default: false
 
       t.timestamps null: false
     end
@@ -44,5 +46,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
     add_index :users, :unlock_token,         unique: true
+    add_index :users, %i[first_name last_name]
   end
 end

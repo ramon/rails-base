@@ -18,7 +18,7 @@ This template comes with:
 
 1. Clone this repo as new project with original repository named "rails-base".
    ```shell
-    git://github.com/ramon/rails-base.git --origin rails-base [MY-NEW-PROJECT]
+    git clone git://github.com/ramon/rails-base.git --origin rails-base [MY-NEW-PROJECT]
    ```
 2. Create your new repo on GitHub and push master into it. Make sure master 
    branch is tracking origin repo.
