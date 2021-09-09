@@ -82,9 +82,8 @@ gem "inline_svg", "~> 1.6"
 gem "name_of_person", "~> 1.0"
 
 gem "decent_exposure", "~> 3.0"
-gem "interactor-rails", "~> 2.2"
+gem "u-case", "~> 4.5.1"
 gem "pagy", "~> 4.7"
-gem "responders", "~> 3.0"
 gem "view_component", require: "view_component/engine"
 
 gem "meta-tags", "~> 2.15"
