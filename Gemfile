@@ -11,8 +11,9 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 # Use SCSS for stylesheets
 gem "sass-rails", ">= 6"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "~> 6.0.0.beta.7"
+# Transpile app-like JavaScript. Read more: https://github.com/rails/jsbundling-rails
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
@@ -30,8 +31,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "debase"
-  gem "ruby-debug-ide"
+  # gem "debase"
+  # gem "ruby-debug-ide"
 end
 
 group :development do
@@ -49,6 +50,7 @@ group :development do
   gem "letter_opener_web", "~> 1.3", ">= 1.3.4"
   gem "pry-rails"
   gem "standard"
+  gem "foreman"
 
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
@@ -90,6 +92,7 @@ gem "simple_form", "~> 5.1"
 gem "google-analytics-rails", "~> 1.1"
 gem "hotwire-rails", "~> 0.1.2"
 gem "requestjs-rails", "~> 0.0.5"
+gem "tailwindcss-rails", "~> 0.4.3"
 
 gem "rack-canonical-host", "~> 1.0"
 gem "rack-cors", "~> 1.1"

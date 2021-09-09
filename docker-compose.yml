@@ -1,0 +1,103 @@
+version: '3'
+networks:
+  development:
+  test:
+volumes:
+  db_data:
+  gem_cache:
+  node_modules:
+  shared_data:
+services:
+  redis:
+    container_name: cc63_redis
+    image: redis:alpine
+    networks:
+      - development
+      - test
+    volumes:
+      - shared_data:/var/shared/redis
+    ports:
+      - "6379:6379"
+  db:
+    container_name: cc63_db
+    image: postgres:alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - shared_data:/var/shared
+    networks:
+      - development
+      - test
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+  app:
+    image: cc63_app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: cc63_app
+    volumes:
+      - type: bind
+        source: .
+        target: /var/app
+      - shared_data:/app/assets/builds
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/var/app/node_modules
+    networks:
+      - development
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    entrypoint: dev-entrypoint.sh
+    command: ['rails', 'server', '-p', '3000', '-b', '0.0.0.0']
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/app_dev
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+      - assets
+  sidekiq:
+    image: cc63_app
+    container_name: cc63_sidekiq
+    depends_on:
+      - app
+      - db
+      - redis
+    volumes:
+      - type: bind
+        source: .
+        target: /var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/var/app/node_modules
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/app_dev
+      REDIS_URL: redis://redis:6379/1
+    entrypoint: dev-entrypoint.sh
+    command: [ 'sidekiq' ]
+  assets:
+    image: cc63_app
+    container_name: cc63_assets
+    tty: true
+    volumes:
+      - type: bind
+        source: .
+        target: /var/app
+      - shared_data:/var/shared
+      - shared_data:/app/assets/builds
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/var/app/node_modules
+    networks:
+      - development
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+    entrypoint: ""
+    command: [ 'foreman', 'start', '-f', 'Procfile.dev', '-m', 'js=1,css=1' ]
